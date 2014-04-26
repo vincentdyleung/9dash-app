@@ -1,15 +1,28 @@
 package com.ninedash.app;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Locale;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.net.http.AndroidHttpClient;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +30,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
@@ -34,6 +59,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+
+    private String fbId;
+    private String username;
+    public static final String HOST = "http://ninedash.herokuapp.com/";
+    private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36";
+    private AndroidHttpClient httpClient;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +105,73 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        fbId = getIntent().getStringExtra("fbId");
+        username = getIntent().getStringExtra("name");
+
+        activity = this;
+        try {
+            checkUserRegistered(fbId);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
+    private void checkUserRegistered(final String fbId) throws URISyntaxException {
+        final URI uri = new URI(HOST + "users/" + fbId);
+        new HttpHandler() {
+            @Override
+            public HttpUriRequest getHttpRequest() {
+                return new HttpGet(uri);
+            }
+            @Override
+            public void onResponse(JSONObject res) {
+                try {
+                    if (res.getInt("count") > 0) {
+                        return;
+                    } else {
+                        new HttpHandler() {
+                            @Override
+                            public HttpUriRequest getHttpRequest() {
+                                String jsonString = "{\"fbid\":\"" + fbId + "\", \"name\":\"" + username + "\"}";
+                                URI uri = null;
+                                try {
+                                    uri = new URI(HOST + "users/");
+                                } catch (URISyntaxException e) {
+                                    e.printStackTrace();
+                                }
+                                HttpPost postRequest = new HttpPost(uri);
+                                postRequest.setHeader("Content-Type", "application/json");
+                                try {
+                                    StringEntity params = new StringEntity(jsonString);
+                                    postRequest.setEntity(params);
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                                return postRequest;
+                            }
+
+                            @Override
+                            public void onResponse(JSONObject res) {
+                                try {
+                                    if (res.getString("fbId").equals(fbId)) {
+                                        Toast.makeText(activity, "Successfully registered", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(activity, "Register error", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }.execute();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
