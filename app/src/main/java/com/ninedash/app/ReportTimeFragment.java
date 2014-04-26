@@ -14,7 +14,7 @@ import android.widget.TextView;
  */
 public class ReportTimeFragment extends Fragment {
 
-    //private string nameOfRestaurant;
+    private String nameOfRestaurant;
     private int numberOfTables;
 
     public ReportTimeFragment(){
@@ -29,9 +29,8 @@ public class ReportTimeFragment extends Fragment {
         btn.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v)
             {
-                //textView.setVisibility(textView.VISIBLE);
+                textView.setVisibility(textView.VISIBLE);
                 getData(view, textView);
-
             }
         });
         return view;
@@ -39,9 +38,12 @@ public class ReportTimeFragment extends Fragment {
     }
 
     public void getData(View view, TextView textView){
+        // Retrieve the users' data
         final EditText table_Data = (EditText) view.findViewById(R.id.editText_numberOfTables);
+        final EditText table_Name = (EditText) view.findViewById(R.id.editText_name);
         numberOfTables = Integer.parseInt(table_Data.getText().toString());
-        textView.setText(numberOfTables);
+        nameOfRestaurant = table_Name.getText().toString();
+        textView.setText(Integer.toString(numberOfTables) + nameOfRestaurant);
     }
 /*
     //Send the information to the server side
