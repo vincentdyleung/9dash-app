@@ -38,6 +38,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Upload a photo"
+        android:id="@+id/enableCamera"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Submit!"
         android:id="@+id/button"
         android:layout_gravity="right"
@@ -52,5 +59,11 @@
         android:id="@+id/textView"
         android:layout_gravity="right"
         android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

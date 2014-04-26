@@ -158,7 +158,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-        /**
+        /**)
          * The fragment argument representing the section number for this
          * fragment.
          */

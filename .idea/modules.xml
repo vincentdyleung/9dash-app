@@ -4,7 +4,19 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/9Dash_new.iml" filepath="$PROJECT_DIR$/9Dash_new.iml" />
       <module fileurl="file://$PROJECT_DIR$/9dash-app.iml" filepath="$PROJECT_DIR$/9dash-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/FriendPickerSample/FriendPickerSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/FriendPickerSample/FriendPickerSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/GraphApiSample/GraphApiSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/GraphApiSample/GraphApiSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/HelloFacebookSample/HelloFacebookSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/HelloFacebookSample/HelloFacebookSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/PlacePickerSample/PlacePickerSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/PlacePickerSample/PlacePickerSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/ProfilePictureSample/ProfilePictureSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/ProfilePictureSample/ProfilePictureSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/RPSSample/RPSSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/RPSSample/RPSSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/Scrumptious/Scrumptious.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/Scrumptious/Scrumptious.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/SessionLoginSample/SessionLoginSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/SessionLoginSample/SessionLoginSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/samples/SwitchUserSample/SwitchUserSample.iml" filepath="$PROJECT_DIR$/libs/facebook/samples/SwitchUserSample/SwitchUserSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/facebook/TestApp/TestApp.iml" filepath="$PROJECT_DIR$/libs/facebook/facebook/TestApp/TestApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/facebook/facebook.iml" filepath="$PROJECT_DIR$/libs/facebook/facebook/facebook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/facebook/facebook/tests/tests.iml" filepath="$PROJECT_DIR$/libs/facebook/facebook/tests/tests.iml" />
     </modules>
   </component>
 </project>
