@@ -1,1 +1,13 @@
-include ':app'
+include ':libs:facebook', ':app', ':FriendPickerSample', ':GraphApiSample', ':HelloFacebookSample', ':PlacePickerSample', ':ProfilePictureSample', ':RPSSample', ':Scrumptious', ':SessionLoginSample', ':SwitchUserSample', ':TestApp', ':facebook', ':tests'
+project(':FriendPickerSample').projectDir = new File('libs/facebook/samples/FriendPickerSample')
+project(':GraphApiSample').projectDir = new File('libs/facebook/samples/GraphApiSample')
+project(':HelloFacebookSample').projectDir = new File('libs/facebook/samples/HelloFacebookSample')
+project(':PlacePickerSample').projectDir = new File('libs/facebook/samples/PlacePickerSample')
+project(':ProfilePictureSample').projectDir = new File('libs/facebook/samples/ProfilePictureSample')
+project(':RPSSample').projectDir = new File('libs/facebook/samples/RPSSample')
+project(':Scrumptious').projectDir = new File('libs/facebook/samples/Scrumptious')
+project(':SessionLoginSample').projectDir = new File('libs/facebook/samples/SessionLoginSample')
+project(':SwitchUserSample').projectDir = new File('libs/facebook/samples/SwitchUserSample')
+project(':TestApp').projectDir = new File('libs/facebook/facebook/TestApp')
+project(':facebook').projectDir = new File('libs/facebook/facebook')
+project(':tests').projectDir = new File('libs/facebook/facebook/tests')

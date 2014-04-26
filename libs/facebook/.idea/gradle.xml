@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/facebook" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/facebook/TestApp" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/facebook/tests" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/FriendPickerSample" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/GraphApiSample" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/HelloFacebookSample" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/PlacePickerSample" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/ProfilePictureSample" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/RPSSample" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/Scrumptious" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/SessionLoginSample" />
+            <option value="/Volumes/Macintosh HD/Users/vincentleung1991/Downloads/facebook-android-sdk-3.8.0/samples/SwitchUserSample" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
+
