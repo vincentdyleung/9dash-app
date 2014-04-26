@@ -24,11 +24,11 @@ public class RestaurantListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View listView = super.onCreateView(inflater, container, savedInstanceState);
-        String[] values = new String[] { "McDonlad's", "Cafe de Coral", "Golden Bowl" };
+        String[] values = new String[] { "McDonald's", "Cafe de Coral", "Golden Bowl" };
         HashMap<String,String> myMap = new HashMap<String, String>();
         ArrayList<HashMap<String,String>> listData = new ArrayList<HashMap<String, String>>();
         for(int i = 0; i < values.length; i++) {
-            myMap.put("Name",values[0]);
+            myMap.put("Name",values[i]);
             listData.add(myMap);
         }
 
