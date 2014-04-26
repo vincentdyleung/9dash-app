@@ -9,6 +9,20 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/facebook" />
+            <option value="$PROJECT_DIR$/libs/facebook/facebook" />
+            <option value="$PROJECT_DIR$/libs/facebook/facebook/TestApp" />
+            <option value="$PROJECT_DIR$/libs/facebook/facebook/tests" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/FriendPickerSample" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/GraphApiSample" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/HelloFacebookSample" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/PlacePickerSample" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/ProfilePictureSample" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/RPSSample" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/Scrumptious" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/SessionLoginSample" />
+            <option value="$PROJECT_DIR$/libs/facebook/samples/SwitchUserSample" />
           </set>
         </option>
       </GradleProjectSettings>
