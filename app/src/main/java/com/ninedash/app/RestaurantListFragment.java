@@ -50,7 +50,7 @@ public class RestaurantListFragment extends ListFragment {
                     JSONArray array = res.getJSONArray("data");
                     ArrayList<String> listData = new ArrayList<String>();
                     for (int i = 0; i < array.length(); i++) {
-                        listData.add(i, array.getJSONObject(i).getString("_id"));
+                        listData.add(i, array.getJSONObject(i).getString("id"));
                     }
                     RestaurantListAdapter adapter = new RestaurantListAdapter(listData);
                     setListAdapter(adapter);
