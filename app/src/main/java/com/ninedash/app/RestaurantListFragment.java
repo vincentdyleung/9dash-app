@@ -1,5 +1,6 @@
 package com.ninedash.app;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,9 +24,11 @@ import java.util.HashMap;
  * Created by Lenovo on 14年4月26日.
  */
 public class RestaurantListFragment extends ListFragment {
+    OnBlockSelectedListener mCallback;
+    ArrayList<String> mListData;
 
     public RestaurantListFragment() {
-
+        mListData = new ArrayList<String>();
     }
 
     @Override
@@ -48,11 +51,10 @@ public class RestaurantListFragment extends ListFragment {
             public void onResponse(JSONObject res) {
                 try {
                     JSONArray array = res.getJSONArray("data");
-                    ArrayList<String> listData = new ArrayList<String>();
                     for (int i = 0; i < array.length(); i++) {
-                        listData.add(i, array.getJSONObject(i).getString("id"));
+                        mListData.add(i, array.getJSONObject(i).getString("id"));
                     }
-                    RestaurantListAdapter adapter = new RestaurantListAdapter(listData);
+                    RestaurantListAdapter adapter = new RestaurantListAdapter(mListData);
                     setListAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -68,5 +70,30 @@ public class RestaurantListFragment extends ListFragment {
         ListView lv = getListView();
         lv.setDivider(null);
 
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // do something with the data
+        mCallback.onBlockSelected(mListData.get(position));
+
+    }
+
+    public interface OnBlockSelectedListener {
+        public void onBlockSelected(String id);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnBlockSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnBlockListener");
+        }
     }
 }

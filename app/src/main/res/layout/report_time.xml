@@ -9,31 +9,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Name of the Restaurant"
-        android:id="@+id/textView_name"
-        android:layout_margin="@dimen/activity_vertical_margin"/>
+        android:text="Waiting time in minutes"
+        android:id="@+id/textView_name"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText_name"
-        android:layout_margin="@dimen/activity_vertical_margin"/>
+        android:id="@+id/waiting_time_field"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Number of tables are waiting"
-        android:id="@+id/textView_numberOfTables"
-        android:layout_margin="@dimen/activity_vertical_margin"/>
+        android:id="@+id/textView_numberOfTables"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText_numberOfTables"
-        android:layout_margin="@dimen/activity_vertical_margin"/>
+        android:id="@+id/waiting_position_field"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Number of tables are waiting"
+        android:id="@+id/textView_numberOfPeople"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/waiting_people_field"/>
 
     <Button
         android:layout_width="wrap_content"

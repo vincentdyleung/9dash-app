@@ -3,6 +3,7 @@ package com.ninedash.app;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -29,7 +30,7 @@ import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends Activity implements ActionBar.TabListener {
+public class MainActivity extends Activity implements ActionBar.TabListener, RestaurantListFragment.OnBlockSelectedListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -50,8 +51,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     private String username;
     public static final String HOST = "http://ninedash.herokuapp.com/";
     private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36";
+    public static final int REST_LIST_FRAG = 0;
+    public static final int REPORT_TIME_FRAG = 1;
     private AndroidHttpClient httpClient;
     private Activity activity;
+    private String selectedRestaurant;
+
+    MenuItem menuItem;
+    String mReportData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +127,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
                         new HTTPHandler() {
                             @Override
                             public HttpUriRequest getHttpRequest() {
-                                String jsonString = "{\"fbid\":\"" + fbId + "\", \"name\":\"" + username + "\"}";
+                                String jsonString = "{\"fbid\":\"" + fbId + "\",\"name\":\"" + username + "\",\"point\":6000}";
                                 URI uri = null;
                                 try {
                                     uri = new URI(HOST + "users/");
@@ -162,10 +169,14 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public String getFbId() {
+        return fbId;
     }
 
     @Override
@@ -195,6 +206,30 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    public String getSelectedRestaurant() {
+        return selectedRestaurant;
+    }
+
+    public void onBlockSelected(String id) {
+        mReportData = id;
+        mViewPager.setCurrentItem(REPORT_TIME_FRAG);
+        ReportTimeFragment reportTimeFrag = new ReportTimeFragment(id);
+        selectedRestaurant = id;
+//        Bundle args = new Bundle();
+//        args.putString("id", mReportData);
+//        reportTimeFrag.setArguments(args);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack so the user can navigate back
+        transaction.add(R.id.fragment_container, reportTimeFrag, "ReportTime");
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
+
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -209,12 +244,17 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position == 0)
+            if (position == 0) {
                 return new RestaurantListFragment();
-            else if (position == 1)
-                return new ReportTimeFragment();
-            else
-                return PlaceholderFragment.newInstance(position + 1);
+            }
+            else if (position == 1) {
+                return new ReportTimeFragment(null);
+            }
+            else {
+                UserFragment userFragment = new UserFragment();
+                userFragment.setDetails();
+                return userFragment;
+            }
         }
 
         @Override
@@ -272,6 +312,48 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
             textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
             //return view;
+        }
+    }
+
+    private class UserFragment extends Fragment {
+        TextView usernameText;
+        TextView pointsText;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_user, viewGroup, false);
+            usernameText = (TextView) view.findViewById(R.id.username);
+            pointsText = (TextView) view.findViewById(R.id.points);
+            return view;
+        }
+
+        public void setDetails() {
+            new HTTPHandler() {
+                @Override
+                public HttpUriRequest getHttpRequest()  {
+                    HttpGet getRequest = null;
+                    URI uri = null;
+                    try {
+                        uri = new URI(HOST + "users/" + fbId);
+
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                    getRequest = new HttpGet(uri);
+                    return getRequest;
+                }
+
+                @Override
+                public void onResponse(JSONObject res) {
+                    try {
+                        Integer points = res.getInt("point");
+                        pointsText.setText(Integer.toString(points));
+                        usernameText.setText(username);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.execute();
         }
     }
 
