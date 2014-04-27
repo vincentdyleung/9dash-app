@@ -1,15 +1,9 @@
 package com.ninedash.app;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Locale;
-import java.util.Map;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -17,13 +11,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.net.http.AndroidHttpClient;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,16 +22,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
@@ -119,7 +105,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     private void checkUserRegistered(final String fbId) throws URISyntaxException {
         final URI uri = new URI(HOST + "users/" + fbId);
-        new HttpHandler() {
+        new HTTPHandler() {
             @Override
             public HttpUriRequest getHttpRequest() {
                 return new HttpGet(uri);
@@ -128,9 +114,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
             public void onResponse(JSONObject res) {
                 try {
                     if (res.getInt("count") > 0) {
+                        Toast.makeText(activity, "Logged in as " + username, Toast.LENGTH_SHORT).show();
                         return;
                     } else {
-                        new HttpHandler() {
+                        new HTTPHandler() {
                             @Override
                             public HttpUriRequest getHttpRequest() {
                                 String jsonString = "{\"fbid\":\"" + fbId + "\", \"name\":\"" + username + "\"}";
@@ -154,7 +141,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
                             @Override
                             public void onResponse(JSONObject res) {
                                 try {
-                                    if (res.getString("fbId").equals(fbId)) {
+                                    if (res.getString("fbid").equals(fbId)) {
                                         Toast.makeText(activity, "Successfully registered", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(activity, "Register error", Toast.LENGTH_SHORT).show();

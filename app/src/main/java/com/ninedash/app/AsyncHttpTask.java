@@ -16,10 +16,10 @@ import java.io.InputStreamReader;
  */
 public class AsyncHttpTask extends AsyncTask<HttpUriRequest, Integer, JSONObject> {
     private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36";
-    private HttpHandler httpHandler;
+    private HTTPHandler httpHandler;
     private AndroidHttpClient httpClient;
 
-    public AsyncHttpTask(HttpHandler handler) {
+    public AsyncHttpTask(HTTPHandler handler) {
         httpHandler = handler;
         httpClient = AndroidHttpClient.newInstance(USER_AGENT);
     }
@@ -46,5 +46,6 @@ public class AsyncHttpTask extends AsyncTask<HttpUriRequest, Integer, JSONObject
     @Override
     public void onPostExecute(JSONObject response) {
         httpHandler.onResponse(response);
+        httpClient.close();
     }
 }

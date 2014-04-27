@@ -6,7 +6,7 @@ import org.json.JSONObject;
 /**
  * Created by vincentleung on 27/4/14.
  */
-public abstract class HttpHandler {
+public abstract class HTTPHandler {
 
     public abstract HttpUriRequest getHttpRequest();
     public abstract void onResponse(JSONObject res);
